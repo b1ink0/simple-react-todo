@@ -1,0 +1,25 @@
+.filters-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding: 0 10px;
+}
+
+.filter-btn {
+	width: 100%;
+	border-radius: 25px;
+	background-color: var(--background-dark-gray);
+	color: var(--text-primary);
+	font-size: 16px;
+	font-weight: 500;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	transition: all;
+	transition-duration: 300ms;
+}
+
+.filter-btn-active, .filter-btn:hover {
+	background-color: var(--background-blue);
+}

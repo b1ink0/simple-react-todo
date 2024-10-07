@@ -1,0 +1,49 @@
+.form {
+	width: 100%;
+	max-width: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	padding: 0 10px;
+}
+
+.text-input {
+	width: 100%;
+	background-color: var(--background-dark-gray);
+	border: none;
+	border-radius: 25px;
+	font-size: 18px;
+	color: var(--text-primary);
+	padding: 10px 45px 10px 20px;
+	outline-color: var(--background-blue);
+}
+
+.submit-btn {
+	position: absolute;
+	right: 0;
+	width: 55px;
+	height: 100%;
+	background-color: transparent;
+	border: none;
+	padding: 10px;
+	margin-right: 6px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.spin {
+	transition: all;
+	transition-duration: 200ms;
+}
+
+.spin:hover {
+	rotate: 90deg;
+}
+
+.hidden {
+	display: none;
+}
