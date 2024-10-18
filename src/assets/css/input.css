@@ -9,30 +9,42 @@
 	padding: 0 10px;
 }
 
+.input-wrap {
+	flex: 1;
+	position: relative;
+}
+
 .text-input {
+	position: relative;
 	width: 100%;
 	background-color: var(--background-dark-gray);
 	border: none;
 	border-radius: 25px;
 	font-size: 18px;
 	color: var(--text-primary);
-	padding: 10px 45px 10px 20px;
+	padding: 10px 50px 10px 20px;
 	outline-color: var(--background-blue);
 }
 
-.submit-btn {
+.submit-btn, 
+.cancel-btn {
 	position: absolute;
+	top: 0;
 	right: 0;
 	width: 55px;
 	height: 100%;
 	background-color: transparent;
 	border: none;
 	padding: 10px;
-	margin-right: 6px;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.cancel-btn  {
+	position: relative;
+	rotate: 45deg;
 }
 
 .spin {

@@ -15,29 +15,29 @@ import '../assets/css/filters.css';
  * @returns {JSX.Element} A React component that displays filter buttons.
  */
 export const Filters = () => {
-  const { filters, filter } = useStateContext(); // Destructure filters and current active filter from context.
-  const { handleFilterChange } = useTodos(); // Get function to handle filter changes.
+    const { filters, filter } = useStateContext(); // Destructure filters and current active filter from context.
+    const { handleFilterChange } = useTodos(); // Get function to handle filter changes.
 
-  return (
-    /**
-     * Wrapper for the filter buttons.
-     *
-     * Group the buttons as a set of related controls for screen readers.
-     */
-    <div className="filters-wrap" role="group" aria-label="Filter todos">
-      {/* Map through filters and create a button for each */}
-      {filters.map((fil) => (
-        <button
-          // Add active class to the button if it's the current filter.
-          className={`filter-btn${filter === fil.type ? ' filter-btn-active' : ''}`}
-          key={fil.type}
-          type="button"
-          onClick={() => handleFilterChange(fil.type)}
-          aria-pressed={filter === fil.type} // Indicate if the button is currently active.
-          aria-label={`Filter todos by ${fil.title}`}>
-          {fil.title}
-        </button>
-      ))}
-    </div>
-  );
+    return (
+        /**
+         * Wrapper for the filter buttons.
+         *
+         * Group the buttons as a set of related controls for screen readers.
+         */
+        <div className="filters-wrap" role="group" aria-label="Filter todos">
+            {/* Map through filters and create a button for each */}
+            {filters.map((fil) => (
+                <button
+                    // Add active class to the button if it's the current filter.
+                    className={`filter-btn${filter === fil.type ? ' filter-btn-active' : ''}`}
+                    key={fil.type}
+                    type="button"
+                    onClick={() => handleFilterChange(fil.type)}
+                    aria-pressed={filter === fil.type} // Indicate if the button is currently active.
+                    aria-label={`Filter todos by ${fil.title}`}>
+                    {fil.title}
+                </button>
+            ))}
+        </div>
+    );
 };

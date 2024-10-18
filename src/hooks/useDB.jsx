@@ -10,39 +10,43 @@ import { useStateContext } from '../context/StateContext';
  * @returns {Object} An object containing functions to update and clear data.
  */
 export const useDB = () => {
-  // Destructure the necessary values from the state context.
-  const { DBKey, defaultData, data, setData } = useStateContext();
+    // Destructure the necessary values from the state context.
+    const { DBKey, defaultData, data, setData, alert } = useStateContext();
 
-  // Save data to localStorage whenever it changes.
-  useEffect(() => {
-    if (data) {
-      localStorage.setItem(DBKey, JSON.stringify(data));
-    }
-  }, [DBKey, data]); // Re-run effect if DBKey or data changes.
+    // Save data to localStorage whenever it changes.
+    useEffect(() => {
+        if (alert.databaseLock) {
+            return;
+        }
 
-  /**
-   * Update the stored data with new data.
-   *
-   * @param {Object} newData - The new data to merge into the existing data.
-   */
-  const updateData = (newData) => {
-    setData((prevData) => ({
-      ...prevData, // Retain previous data.
-      ...newData // Merge with new data.
-    }));
-  };
+        if (data) {
+            localStorage.setItem(DBKey, JSON.stringify(data));
+        }
+    }, [DBKey, data, alert.databaseLock]); // Re-run effect if DBKey or data changes.
 
-  /**
-   * Clear all stored data and reset to default.
-   */
-  const clearData = () => {
-    setData(defaultData); // Reset data to default.
-    localStorage.removeItem(DBKey); // Remove item from localStorage.
-  };
+    /**
+     * Update the stored data with new data.
+     *
+     * @param {Object} newData - The new data to merge into the existing data.
+     */
+    const updateData = (newData) => {
+        setData((prevData) => ({
+            ...prevData, // Retain previous data.
+            ...newData // Merge with new data.
+        }));
+    };
 
-  // Return functions to be used in components.
-  return {
-    updateData,
-    clearData
-  };
+    /**
+     * Clear all stored data and reset to default.
+     */
+    const clearData = () => {
+        setData(defaultData); // Reset data to default.
+        localStorage.removeItem(DBKey); // Remove item from localStorage.
+    };
+
+    // Return functions to be used in components.
+    return {
+        updateData,
+        clearData
+    };
 };

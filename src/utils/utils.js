@@ -7,24 +7,24 @@
  * @returns {string} The generated unique ID.
  */
 export const generateId = () => {
-  // Check if crypto.randomUUID is available and use it for generating a UUID.
-  if (window?.crypto?.randomUUID) {
-    return window.crypto.randomUUID();
-  }
-
-  // Fallback to manual random generation if crypto.randomUUID is not available.
-  const generateRandomBytes = () => {
-    const array = new Uint8Array(16); // Generate 16 random bytes.
-    if (window?.crypto) {
-      window.crypto.getRandomValues(array);
-    } else {
-      for (let i = 0; i < array.length; i++) {
-        array[i] = Math.floor(Math.random() * 256);
-      }
+    // Check if crypto.randomUUID is available and use it for generating a UUID.
+    if (window?.crypto?.randomUUID) {
+        return window.crypto.randomUUID();
     }
-    return array;
-  };
 
-  const array = generateRandomBytes();
-  return [...array].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+    // Fallback to manual random generation if crypto.randomUUID is not available.
+    const generateRandomBytes = () => {
+        const array = new Uint8Array(16); // Generate 16 random bytes.
+        if (window?.crypto) {
+            window.crypto.getRandomValues(array);
+        } else {
+            for (let i = 0; i < array.length; i++) {
+                array[i] = Math.floor(Math.random() * 256);
+            }
+        }
+        return array;
+    };
+
+    const array = generateRandomBytes();
+    return [...array].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 };

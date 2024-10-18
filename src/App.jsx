@@ -11,10 +11,10 @@ import { Todos } from './containers/Todos';
  * @returns {JSX.Element} The main application component.
  */
 export const App = () => {
-  return (
-    // Wrap the Todos component with the StateProvider to make the context available.
-    <StateProvider>
-      <Todos />
-    </StateProvider>
-  );
+    return (
+        // Wrap the Todos component with the StateProvider to make the context available.
+        <StateProvider>
+            <Todos />
+        </StateProvider>
+    );
 };
