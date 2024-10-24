@@ -11,7 +11,7 @@ import { useStateContext } from '../context/StateContext';
  */
 export const useDB = () => {
     // Destructure the necessary values from the state context.
-    const { DBKey, defaultData, data, setData, alert } = useStateContext();
+    const { DBKey, defaultData, data, setData, alert, setAlert, defaultAlert } = useStateContext();
 
     // Save data to localStorage whenever it changes.
     useEffect(() => {
@@ -20,9 +20,25 @@ export const useDB = () => {
         }
 
         if (data) {
-            localStorage.setItem(DBKey, JSON.stringify(data));
+            try {
+                localStorage.setItem(DBKey, JSON.stringify(data));
+            } catch (err) {
+                setAlert((prev) => ({
+                    ...prev,
+                    show: true,
+                    message:
+                        'Something went wrong while saving to database! Would you like to clear data to resolve this error or cancel and try again?.',
+                    autoHide: false,
+                    handler: () => {
+                        localStorage.clear();
+                        setAlert(defaultAlert);
+                    },
+                    handlerText: 'Clear',
+                    global: true
+                }));
+            }
         }
-    }, [DBKey, data, alert.databaseLock]); // Re-run effect if DBKey or data changes.
+    }, [DBKey, data, alert.databaseLock, setAlert, defaultAlert]); // Re-run effect if DBKey, alert or data changes.
 
     /**
      * Update the stored data with new data.

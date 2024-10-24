@@ -72,7 +72,9 @@ export const useTodos = () => {
             return;
         }
 
-        updateData({ todos: [...todos, { ...currentTodo, id: generateId() }] });
+        updateData({
+            todos: [...todos, { ...currentTodo, title: currentTodo.title.trim(), id: generateId() }]
+        });
         setCurrentTodo(defaultTodo); // Reset current todo to default.
         focusInput();
     };
@@ -167,7 +169,11 @@ export const useTodos = () => {
         }
 
         updateData({
-            todos: todos.map((todo) => (todo.id === currentTodo.id ? currentTodo : todo))
+            todos: todos.map((todo) =>
+                todo.id === currentTodo.id
+                    ? { ...currentTodo, title: currentTodo.title.trim() }
+                    : todo
+            )
         });
         setCurrentTodo(defaultTodo); // Reset current todo to default.
     };
